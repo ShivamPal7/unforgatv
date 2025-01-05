@@ -19,8 +19,8 @@ const fontBody = Manrope({
 })
 
 export const metadata: Metadata = {
-  title: "SaaS Application",
-  description: "SaaS Application",
+  title: "Unforgatv",
+  description: "Unforgatv: Thumbnail Designer",
 };
 
 
