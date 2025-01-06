@@ -58,16 +58,17 @@ export function Contact() {
     e.preventDefault()
     setIsSubmitting(true)
 
+    // Store form reference
+    const form = e.currentTarget
+
     try {
-      const formData = new FormData(e.currentTarget)
+      const formData = new FormData(form)
       const data = {
         firstName: formData.get('firstName'),
         lastName: formData.get('lastName'),
         email: formData.get('email'),
         message: formData.get('message'),
       }
-
-      console.log('Sending data:', data)
 
       const response = await fetch('/api/contact', {
         method: 'POST',
@@ -77,14 +78,24 @@ export function Contact() {
         body: JSON.stringify(data),
       })
 
-      const result = await response.json()
-
       if (!response.ok) {
-        throw new Error(result.error || 'Failed to send message')
+        throw new Error('Failed to send message')
+      }
+
+      // Don't try to parse response if status is 204 (No Content)
+      try {
+        await response.json()
+      } catch (error) {
+        // If parsing fails, it's ok as long as response was ok
+        console.log('No JSON response, but message sent successfully')
       }
 
       toast.success('Message sent successfully!')
-      e.currentTarget.reset()
+      
+      // Safe form reset
+      if (form instanceof HTMLFormElement) {
+        form.reset()
+      }
     } catch (error: any) {
       console.error('Error:', error)
       toast.error(error.message || 'Failed to send message. Please try again.')

@@ -28,7 +28,7 @@ export function Hero() {
                                 asChild
                                 className="gradient-button transition-transform hover:scale-105 text-foreground font-bold"
                             >
-                                <Link href="#contact">Contact Me</Link>
+                                <Link href="/work">My Work</Link>
                             </Button>
                             <Button
                                 variant="outline"
@@ -36,7 +36,7 @@ export function Hero() {
                                 asChild
                                 className="w-full sm:w-auto"
                             >
-                                <Link href="#pricing">View Pricing</Link>
+                                <Link href="#contact">Contact Me</Link>
                             </Button>
                         </div>
                     </AnimationContainer>
